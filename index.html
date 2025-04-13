@@ -133,8 +133,7 @@ body.chats-active .container :where(.app-header, .suggestions) {
   display: flex;
   gap: 11px;
   align-items: center;
-}
-.chats-container .message .avatar {
+}.chats-container .message .avatar {
   width: 40px;
   height: 40px;
   flex-shrink: 0;
@@ -152,6 +151,7 @@ body.chats-active .container :where(.app-header, .suggestions) {
   object-fit: cover;
   display: block;
 }
+
 
 .chats-container .message.loading .avatar {
   animation: none;
@@ -298,6 +298,24 @@ body.bot-responding .prompt-form #stop-response-btn {
   padding: 16px 20px 0;
   color: var(--placeholder-color);
 }
+.copy-btn {
+  transition: all 0.3s ease;
+  opacity: 0.8;
+}
+
+.copy-btn:hover {
+  opacity: 1;
+  transform: scale(1.1);
+  color: #1e90ff; /* Blue color on hover */
+  cursor: pointer;
+}
+
+/* Optional: Style for the message bubble itself (if needed) */
+.bot-message {
+  position: relative;  /* Ensure it’s relative to position the copy button */
+  padding-left: 40px;  /* Give room for the icon on the left */
+}
+
 
 
 
@@ -390,6 +408,7 @@ body.bot-responding .prompt-form #stop-response-btn {
             <input type="text" placeholder="Ask Byte" class="prompt-input" required />
             <div class="prompt-actions">
               
+              
               <!-- File Upload Wrapper -->
               <div class="file-upload-wrapper">
                 <img src="#" class="file-preview" />
@@ -400,10 +419,12 @@ body.bot-responding .prompt-form #stop-response-btn {
                 <button id="add-file-btn" type="button" class="material-symbols-rounded">attach_file</button>
                 
               </div>
+              
               <!-- Send Prompt and Stop Response Buttons -->
               <button id="stop-response-btn" type="button" class="material-symbols-rounded">stop_circle</button>
               <button id="send-message-button" class="icon material-symbols-rounded">send</button>
             </div>
+            
           </form>
           <script>
             
@@ -414,12 +435,57 @@ body.bot-responding .prompt-form #stop-response-btn {
         </div>
         <p class="disclaimer-text">Byte can make mistakes, so double-check it.</p>
       </div>
-    </div>
+    
+    
+    
     <script>
-
 // JavaScript code for the chatbot functionality
 
 
+const typingEffect = (text, textElement, botMsgDiv) => {
+  textElement.textContent = "";
+  const words = text.split(" ");
+  let wordIndex = 0;
+  typingInterval = setInterval(() => {
+    if (wordIndex < words.length) {
+      textElement.textContent += (wordIndex === 0 ? "" : " ") + words[wordIndex++];
+      scrollToBottom();
+    } else {
+      clearInterval(typingInterval);
+      botMsgDiv.classList.remove("loading");
+      document.body.classList.remove("bot-responding");
+
+      // ✅ Create and position the copy button in the left-middle of the bot message
+      const copyBtn = document.createElement("button");
+      copyBtn.classList.add("copy-btn");
+      copyBtn.innerHTML = `<span class="material-symbols-rounded">content_copy</span>`;
+      copyBtn.style.position = "absolute";
+      copyBtn.style.left = "100px";  // Positioned at the left of the message
+      copyBtn.style.top = "100%";    // Centered vertically
+      copyBtn.style.transform = "translateY(170%)"; // Adjust for exact middle
+      copyBtn.style.background = "none";
+      copyBtn.style.border = "none";
+      copyBtn.style.cursor = "pointer";
+      copyBtn.style.color = "var(--placeholder-color)";
+      copyBtn.style.fontSize = "1.0rem";
+
+      copyBtn.onclick = () => {
+        navigator.clipboard.writeText(textElement.textContent)
+          .then(() => {
+            copyBtn.innerHTML = `<span class="material-symbols-rounded">check</span>`;
+            setTimeout(() => {
+              copyBtn.innerHTML = `<span class="material-symbols-rounded">content_copy</span>`;
+            }, 1500);
+          })
+          .catch(() => alert("Failed to copy text."));
+      };
+
+      botMsgDiv.style.position = "relative"; // Make the parent div relative to position the button correctly
+      botMsgDiv.appendChild(copyBtn); // Append the copy button
+      scrollToBottom();
+    }
+  }, 40);
+};
 const container = document.querySelector(".container");
 const chatsContainer = document.querySelector(".chats-container");
 const promptForm = document.querySelector(".prompt-form");
@@ -451,21 +517,7 @@ const createMessageElement = (content, ...classes) => {
 
 const scrollToBottom = () => container.scrollTo({ top: container.scrollHeight, behavior: "smooth" });
 
-const typingEffect = (text, textElement, botMsgDiv) => {
-  textElement.textContent = "";
-  const words = text.split(" ");
-  let wordIndex = 0;
-  typingInterval = setInterval(() => {
-    if (wordIndex < words.length) {
-      textElement.textContent += (wordIndex === 0 ? "" : " ") + words[wordIndex++];
-      scrollToBottom();
-    } else {
-      clearInterval(typingInterval);
-      botMsgDiv.classList.remove("loading");
-      document.body.classList.remove("bot-responding");
-    }
-  }, 40);
-};
+// Removed duplicate declaration of typingEffect
 
 const generateResponse = async (botMsgDiv) => {
   const textElement = botMsgDiv.querySelector(".message-text");
@@ -826,7 +878,6 @@ document.addEventListener("click", ({ target }) => {
 
 promptForm.addEventListener("submit", handleFormSubmit);
 promptForm.querySelector("#add-file-btn").addEventListener("click", () => fileInput.click());
-
 
 </script>
 
