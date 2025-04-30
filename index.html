@@ -436,7 +436,15 @@ body.bot-responding .prompt-form #stop-response-btn {
         <p class="disclaimer-text">Byte can make mistakes, so double-check it.</p>
       </div>
     
-    
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LD2EPL0TMY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LD2EPL0TMY');
+</script>
     
     <script>
 // JavaScript code for the chatbot functionality
@@ -494,7 +502,7 @@ const fileInput = promptForm.querySelector("#file-input");
 const fileUploadWrapper = promptForm.querySelector(".file-upload-wrapper");
 const themeToggleBtn = document.querySelector("#theme-toggle-btn");
 
-const API_KEY = "AIzaSyCqA8o0Op7n353DuEtBb8Qv2hL1aK-1SOM";
+const API_KEY = "AIzaSyBld3XurD4BpW-HyOYw81swWtsjYjCNMOY";
 const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;
 
 
