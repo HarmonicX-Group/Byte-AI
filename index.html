@@ -321,7 +321,8 @@ body.bot-responding .prompt-form #stop-response-btn {
 
 
 /* Responsive media query code for small screens */
-@media (max-width: 1024px) {
+/* Responsive media query code for small screens */
+@media (max-width: 768px) {
   .container {
     padding: 20px 0 100px;
   }
@@ -341,7 +342,6 @@ body.bot-responding .prompt-form #stop-response-btn {
 
   .chats-container .bot-message {
     margin: 4px auto;
-    padding-right: 48px; /* Room for copy button */
   }
 
   .prompt-container :where(.prompt-wrapper, .prompt-form, .prompt-actions) {
@@ -370,10 +370,10 @@ body.bot-responding .prompt-form #stop-response-btn {
     display: none;
   }
 
-  /* Copy button styles for mobile + tablet */
+  /* 👇 Copy icon styling for small screens */
   .copy-btn {
-    opacity: 1 !important;
     display: block !important;
+    opacity: 1 !important;
     transform: scale(1) !important;
     position: absolute;
     top: 10px;
@@ -392,6 +392,10 @@ body.bot-responding .prompt-form #stop-response-btn {
     transform: scale(1.2);
   }
 }
+
+
+   
+   
 
     </style>
   </head>
