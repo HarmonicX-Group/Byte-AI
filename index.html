@@ -321,44 +321,78 @@ body.bot-responding .prompt-form #stop-response-btn {
 
 
 /* Responsive media query code for small screens */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .container {
     padding: 20px 0 100px;
   }
+
   .app-header :is(.heading, .sub-heading) {
     font-size: 2rem;
     line-height: 1.4;
   }
+
   .app-header .sub-heading {
     font-size: 1.7rem;
   }
+
   .container .chats-container {
     gap: 15px;
   }
+
   .chats-container .bot-message {
     margin: 4px auto;
+    padding-right: 48px; /* Room for copy button */
   }
+
   .prompt-container :where(.prompt-wrapper, .prompt-form, .prompt-actions) {
     gap: 8px;
     height: 53px;
   }
+
   .prompt-container button {
     width: 53px;
   }
+
   .prompt-form :is(.file-upload-wrapper, button, img) {
     height: 42px;
     width: 42px;
   }
+
   .prompt-form .prompt-input {
     padding-left: 20px;
   }
+
   .prompt-form .file-upload-wrapper.active #cancel-file-btn {
     opacity: 0;
   }
+
   .prompt-wrapper.hide-controls :where(#theme-toggle-btn, #delete-chats-btn) {
     display: none;
   }
+
+  /* Copy button styles for mobile + tablet */
+  .copy-btn {
+    opacity: 1 !important;
+    display: block !important;
+    transform: scale(1) !important;
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    font-size: 1.2rem;
+    padding: 6px;
+    border-radius: 50%;
+    color: #1e90ff;
+    background: rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(6px);
+    z-index: 99;
+    transition: all 0.3s ease;
+  }
+
+  .copy-btn:active {
+    transform: scale(1.2);
+  }
 }
+
     </style>
   </head>
   <body>
