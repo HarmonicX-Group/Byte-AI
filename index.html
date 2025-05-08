@@ -299,23 +299,9 @@ body.bot-responding .prompt-form #stop-response-btn {
   padding: 16px 20px 0;
   color: var(--placeholder-color);
 }
-.copy-btn {
-  transition: all 0.3s ease;
-  opacity: 0.8;
-}
 
-.copy-btn:hover {
-  opacity: 1;
-  transform: scale(1.1);
-  color: #1e90ff; /* Blue color on hover */
-  cursor: pointer;
-}
 
-/* Optional: Style for the message bubble itself (if needed) */
-.bot-message {
-  position: relative;  /* Ensure it’s relative to position the copy button */
-  padding-left: 40px;  /* Give room for the icon on the left */
-}
+
 
 
 
@@ -370,26 +356,7 @@ body.bot-responding .prompt-form #stop-response-btn {
     display: none;
   }
 
-  /* 👇 Copy icon styling for small screens */
-  .copy-btn {
-    display: block !important;
-    opacity: 1 !important;
-    transform: scale(1) !important;
-    position: absolute;
-    top: 10px;
-    right: 12px;
-    font-size: 1.2rem;
-    padding: 6px;
-    border-radius: 50%;
-    color: #1e90ff;
-    background: rgba(255, 255, 255, 0.07);
-    backdrop-filter: blur(6px);
-    z-index: 99;
-    transition: all 0.3s ease;
-  }
-
-  .copy-btn:active {
-    transform: scale(1.2);
+   
   }
 }
 
