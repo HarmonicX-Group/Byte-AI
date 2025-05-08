@@ -482,33 +482,9 @@ const typingEffect = (text, textElement, botMsgDiv) => {
       botMsgDiv.classList.remove("loading");
       document.body.classList.remove("bot-responding");
 
-      // ✅ Create and position the copy button in the left-middle of the bot message
-      const copyBtn = document.createElement("button");
-      copyBtn.classList.add("copy-btn");
-      copyBtn.innerHTML = `<span class="material-symbols-rounded">content_copy</span>`;
-      copyBtn.style.position = "absolute";
-      copyBtn.style.left = "100px";  // Positioned at the left of the message
-      copyBtn.style.top = "100%";    // Centered vertically
-      copyBtn.style.transform = "translateY(170%)"; // Adjust for exact middle
-      copyBtn.style.background = "none";
-      copyBtn.style.border = "none";
-      copyBtn.style.cursor = "pointer";
-      copyBtn.style.color = "var(--placeholder-color)";
-      copyBtn.style.fontSize = "1.0rem";
+     
 
-      copyBtn.onclick = () => {
-        navigator.clipboard.writeText(textElement.textContent)
-          .then(() => {
-            copyBtn.innerHTML = `<span class="material-symbols-rounded">check</span>`;
-            setTimeout(() => {
-              copyBtn.innerHTML = `<span class="material-symbols-rounded">content_copy</span>`;
-            }, 1500);
-          })
-          .catch(() => alert("Failed to copy text."));
-      };
 
-      botMsgDiv.style.position = "relative"; // Make the parent div relative to position the button correctly
-      botMsgDiv.appendChild(copyBtn); // Append the copy button
       scrollToBottom();
     }
   }, 40);
